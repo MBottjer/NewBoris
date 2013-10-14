@@ -4,13 +4,13 @@ describe Bike do
 
 	it 'is not broken when initially rented' do 
 		bike = Bike.new
-		expect(bike).not_to be_broken
+		expect(bike.broken?).to be_false
 	end
 
 	it 'can be broken' do
 		bike = Bike.new
 		bike.break!
-		expect(bike).to be_broken
+		expect(bike.broken?).to be_true
 	end
 
 end
