@@ -13,4 +13,9 @@ describe Bike do
 		expect(bike.broken?).to be_true
 	end
 
+  it 'can be fixed' do
+    bike = Bike.new
+    bike.break!
+    bike.fix
+
 end
