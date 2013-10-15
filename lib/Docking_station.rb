@@ -17,7 +17,9 @@ class DockingStation
 		working_bikes.pop
 	end
 
-
-
+	def release_to_van
+		broken_bikes = @bike_store.select {|bicycle| bicycle.broken?}
+		broken_bikes
+	end
 
 end
