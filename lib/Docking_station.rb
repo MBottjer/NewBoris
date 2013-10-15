@@ -12,5 +12,9 @@ class DockingStation
 		@bike_store<<bike 
 	end
 
+	def rent
+		@bike_store.pop
+	end
+
 
 end

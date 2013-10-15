@@ -15,7 +15,18 @@ describe DockingStation do
 	end
 
 	it 'can release a bike' do 
+		station.dock(bike)
 		expect(station.rent).to eq bike 
+	end
+
+	it 'does not release bike if none available' do
+		expect(station.rent).to eq nil
+	end
+
+	it 'does not rent bike if bike is broken' do
+			bike.break!
+			station.dock(bike)
+			expect(station.rent).to eq nil
 	end
 
 end 
