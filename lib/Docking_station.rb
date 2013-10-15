@@ -1,6 +1,14 @@
-class DockingStation 
+class DockingStation
+
+	def initialize
+		@bike_store = []
+	end
 
 	def bike_available?
-		@bike_stores = []
+		@bike_store.any?
 	end
+
+	# def dock(bik)
+
+
 end
