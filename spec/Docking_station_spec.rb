@@ -54,4 +54,14 @@ describe DockingStation do
 		expect(station.release_to_van).to eq [bike1, bike2]
 	end
 
+	 it 'looses bikes when they are rented' do
+	 	bike1 = double :bike, broken?: false
+	 	bike2 = double :bike, broken?: false
+	 	station.dock bike1
+	 	station.dock bike2
+	 	expect(station.bike_count).to eq 2
+	 	station.release
+	 	expect(station.bike_count).to eq 1
+	 end
+
 end 

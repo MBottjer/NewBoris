@@ -13,7 +13,8 @@ class DockingStation
 	end
 
 	def release
-		working_bikes.pop
+		bike = working_bikes.last
+		@bike_store.delete(bike)
 	end
 
 	def release_to_van
@@ -26,6 +27,10 @@ class DockingStation
 
 	def broken_bikes
 		@bike_store.select {|bicycle| bicycle.broken?}
+	end
+
+	def bike_count
+		@bike_store.count
 	end
 
 end
