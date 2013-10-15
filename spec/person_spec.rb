@@ -25,9 +25,9 @@ describe Person do
 	end
 
 	it 'does note have bike after returning bike' do
-		station = double :station, {dock: nil} 
+		station = double :station, {dock: :banana} 
 		person = Person.new(bike)
-		expect(station).to receive(:dock).with (:bike)
+		expect(station).to receive(:dock).with (bike)
 		person.return_bike_to station
 
 		expect(person).not_to have_bike      
