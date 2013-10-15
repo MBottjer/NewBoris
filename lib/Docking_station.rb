@@ -8,7 +8,9 @@ class DockingStation
 		@bike_store.any?
 	end
 
-	# def dock(bik)
+	def dock(bike)
+		@bike_store<<bike 
+	end
 
 
 end

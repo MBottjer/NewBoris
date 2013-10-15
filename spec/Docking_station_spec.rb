@@ -14,4 +14,8 @@ describe DockingStation do
 		expect(station.dock(bike)).to eq [bike]
 	end
 
+	it 'can release a bike' do 
+		expect(station.rent).to eq bike 
+	end
+
 end 
