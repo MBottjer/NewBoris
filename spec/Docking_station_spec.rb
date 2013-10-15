@@ -29,4 +29,10 @@ describe DockingStation do
 			expect(station.rent).to eq nil
 	end
 
+	it 'releases broken bike to the van' do 
+		bike.break!
+		station.dock(bike)
+		expect(station.released_to_van).to eq bike
+	end
+
 end 

@@ -13,8 +13,11 @@ class DockingStation
 	end
 
 	def rent
-		@bike_store.pop
+		working_bikes = @bike_store.reject {|bicycle| bicycle.broken?} 
+		working_bikes.pop
 	end
+
+
 
 
 end
