@@ -9,7 +9,7 @@ describe Person do
 
 	it 'can have bike' do
 		person = Person.new :bike
-		expect(person).to have bike
+		expect(person).to have_bike
 	end
 
 
