@@ -64,4 +64,15 @@ describe DockingStation do
 	 	expect(station.bike_count).to eq 1
 	 end
 
+	 it 'can hold a maximum of five bikes' do 
+	 	5.times { station.dock(bike)}
+	 	expect(station.bike_count).to eq 5
+	 end
+
+	 it 'cannot hold 6 bikes' do 
+	 	6.times {station.dock(bike)} 
+	 	expect(station.bike_count).to eq 5
+	 end
+
+
 end 

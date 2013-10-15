@@ -1,7 +1,8 @@
 class DockingStation
 
-	def initialize
-		@bike_store = []
+	def initialize(bikes = [], capacity = 5)
+		@bike_store = bikes 
+		@capacity = capacity 
 	end
 
 	def bike_available?
@@ -9,7 +10,7 @@ class DockingStation
 	end
 
 	def dock(bike)
-		@bike_store<<bike 
+		@bike_store<<bike unless bike_count == @capacity
 	end
 
 	def release
