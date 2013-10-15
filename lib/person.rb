@@ -5,7 +5,11 @@ class Person
 	end
 
 	def has_bike?
-		@bike
+		!@bike.nil?
+	end
+
+	def rent_bike_from station
+		@bike = station.release
 	end
 
 end
