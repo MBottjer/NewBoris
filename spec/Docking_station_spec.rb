@@ -3,8 +3,10 @@ require 'bike'
 
 describe DockingStation do 
 
-	let (:bike) {Bike.new}
+	let (:bike) { double :bike, broken?: false }
 	let (:station) {DockingStation.new}
+	let (:broken_bike) { double :bike, broken?: true }
+
 
 	it 'can tell us when there are no bikes available' do 
 		expect(station.bike_available?).not_to be_true
@@ -24,28 +26,32 @@ describe DockingStation do
 	end
 
 	it 'does not release bike if bike is broken' do
-		bike.break!
-		station.dock(bike)
+		station.dock broken_bike
 		expect(station.release).to eq nil
 	end
 
 	it 'selects broken bikes' do
-		bike.break!
-		station.dock(bike)
-		expect(station.broken_bikes).to eq [bike]
+		station.dock broken_bike
+		expect(station.broken_bikes).to eq [broken_bike]
 	end
 
 	it 'releases broken bike to the van' do 
-		bike.break!
-		station.dock(bike)
-		expect(station.release_to_van).to eq [bike]
+		station.dock broken_bike
+		expect(station.release_to_van).to eq [broken_bike]
 	end
 
 	it 'after releases bike, bike is no longer in store' do
-		bike.break!
-		station.dock(bike)
+		station.dock broken_bike
 		station.release_to_van
 		expect(station.broken_bikes).to eq []
+	end
+
+	it 'releases multiple broken bikes to the van' do
+		bike1 = broken_bike
+		bike2 = double :bike, broken?: true
+		station.dock bike1
+		station.dock bike2
+		expect(station.release_to_van).to eq [bike1, bike2]
 	end
 
 end 
