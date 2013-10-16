@@ -25,9 +25,21 @@ shared_examples 'a bike container' do
     expect(container.full?).to be_false
   end
 
-  # it 'releases broken bike to the van' do 
-  #   container.dock broken_bike
+  it 'releases broken bikes to the container requesting them' do
+    other = double :other, empty: nil
+    container = described_class.new broken_bike
+    expect(other).to receive(:empty) with [broken_bike]
+    container.release_broken_bikes_to other
+  end
+
+
+  # it 'releases broken bikes to van' do 
+    
   #   expect(container.release_to_van).to eq [broken_bike]
+  # end
+
+  # it 'releases broken bikes to garage' do
+
   # end
 
 end
