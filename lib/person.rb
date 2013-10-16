@@ -16,7 +16,8 @@ class Person
 	end
 
   def return_bike_to station
-   	station.dock(@bike)
+    return nil if station.bike_count == station.capacity
+   	station.dock(@bike) 
   	@bike = nil
   end
 

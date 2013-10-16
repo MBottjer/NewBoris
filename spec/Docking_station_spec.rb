@@ -74,4 +74,8 @@ describe DockingStation do
 	 	expect(station.bike_count).to eq 5
 	 end
 
+	 it 'returns it\'s capacity' do
+	 	expect(station.capacity).to eq 5
+	 end
+
 end 
