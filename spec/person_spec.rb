@@ -28,14 +28,14 @@ describe Person do
 	end
 
 	it 'can dock a bike in a station' do
-		station = double :station, {capacity: 5, bike_count: 0, dock: :banana} 
+		station = double :station, {full?: false, dock: :banana} 
 		expect(station).to receive(:dock).with (bike)
 		jeff.return_bike_to station
 	end
 
 
 	it 'does not have bike after returning bike' do
-		station = double :station, {capacity: 5, bike_count: 0, dock: :banana} 
+		station = double :station, {full?: false, dock: :banana} 
 		jeff.return_bike_to station
 
 		expect(jeff).not_to have_bike      
@@ -46,19 +46,19 @@ describe Person do
 		jeff.has_accident
 	end
 
+  it 'has the bike he believes he has' do
+    expect(jeff.bike).to be bike
+  end
+
 	it 'can\'t rent another bike if it has a rented bike' do 
 		jeff.rent_bike_from station
 		expect(jeff.bike).to be bike
 	end
 
 	it 'keeps bike if attempts to return it to full docking station' do
-		station2 = double :station, { capacity: 5, bike_count: 5 }
-		jeff.return_bike_to station2
-		expect(jeff.has_bike?).to be true
-	end
-
-	it 'can return a bike instance variable' do
-		expect(jeff.bike).to be bike
+		station = double :station, { full?: true }
+		jeff.return_bike_to station
+		expect(jeff.has_bike?).to  be_true
 	end
 
 end

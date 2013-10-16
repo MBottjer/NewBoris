@@ -1,5 +1,6 @@
 require 'Docking_station'
 require 'bike'
+require 'bike_container_spec'
 
 describe DockingStation do 
 
@@ -8,18 +9,7 @@ describe DockingStation do
 	let (:broken_bike) { double :bike, broken?: true }
 
 
-	it 'can tell us when there are no bikes available' do 
-		expect(station.bike_available?).not_to be_true
-	end
-
-	it 'can accept a bike' do
-		expect(station.dock(bike)).to eq [bike]
-	end
-
-	it 'can release a bike' do 
-		station.dock(bike)
-		expect(station.release).to eq bike 
-	end
+	it_behaves_like 'a bike container'
 
 	it 'does not release bike if none available' do
 		expect(station.release).to eq nil

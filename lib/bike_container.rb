@@ -1,13 +1,13 @@
 module BikeContainer
 
-	DEFAULT_CAPACITY = 10
+	# DEFAULT_CAPACITY = 10
 
 	def bike_available?
 		working_bikes.any?
 	end
 
 	def dock(bike)
-		@bike_store<<bike unless bike_count == @capacity
+		@bike_store<<bike unless full?
 	end
 
 	def release
@@ -30,4 +30,13 @@ module BikeContainer
 	def bike_count
 		@bike_store.count
 	end
+
+  def capacity
+    @capacity
+  end
+
+  def full?
+    bike_count == capacity
+  end
+
 end

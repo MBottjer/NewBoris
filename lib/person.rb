@@ -11,15 +11,13 @@ class Person
 	end
 
 	def rent_bike_from station
-    return nil if has_bike?
-		@bike = station.release
+		@bike = station.release unless has_bike?
 	end
 
-  	def return_bike_to station
-    	return nil if station.bike_count == station.capacity
-   		station.dock(@bike) 
-  		@bike = nil
-  	end
+  def return_bike_to station
+		(station.dock(@bike); @bike = nil) unless station.full?
+		#@bike = nil unless station.full?
+	end
 
 	def has_accident
     @bike.break!

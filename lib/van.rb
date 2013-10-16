@@ -1,14 +1,10 @@
 require_relative 'bike_container'
 
-class DockingStation
-
+class Van
 	include BikeContainer
-
-	attr_reader :capacity
 
 	def initialize(bikes = [], capacity = 5)
 		@bike_store = bikes 
 		@capacity = capacity 
 	end
-
 end
