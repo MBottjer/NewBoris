@@ -4,6 +4,7 @@ shared_examples 'a bike container' do
 	let(:container) { described_class.new }
 
 	let(:bike) { double :bike, {broken?: false} }
+  let(:broken_bike) { double :bike, {broken?: true} }
 
 	it 'can tell us when there are no bikes available' do 
 		expect(container.bike_available?).not_to be_true
@@ -13,10 +14,10 @@ shared_examples 'a bike container' do
 		expect(container.dock(bike)).to eq [bike]
 	end
 
-	it 'can release a bike' do 
-		container.dock(bike)
-		expect(container.release).to eq bike 
-	end
+  it 'selects broken bikes' do
+    container.dock broken_bike
+    expect(container.broken_bikes).to eq [broken_bike]
+  end
 
   it 'can say its capacity' do
     expect(container.capacity).to be 5

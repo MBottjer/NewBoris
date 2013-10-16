@@ -11,4 +11,9 @@ class DockingStation
 		@capacity = capacity 
 	end
 
+	def release_to_customer
+		bike = working_bikes.last
+		@bike_store.delete(bike)
+	end
+
 end

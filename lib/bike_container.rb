@@ -10,10 +10,6 @@ module BikeContainer
 		@bike_store<<bike unless full?
 	end
 
-	def release
-		bike = working_bikes.last
-		@bike_store.delete(bike)
-	end
 
 	def release_to_van
 		broken_bikes.map{ |bike| @bike_store.delete(bike) }
