@@ -10,14 +10,7 @@ shared_examples 'a bike container' do
 		expect(container.bike_available?).not_to be_true
 	end
 
-	it 'can accept a bike' do
-		expect(container.dock(bike)).to eq [bike]
-	end
-
-  it 'selects broken bikes' do
-    container.dock broken_bike
-    expect(container.broken_bikes).to eq [broken_bike]
-  end
+	
 
   it 'can say its capacity' do
     expect(container.capacity).to be 5
@@ -31,5 +24,10 @@ shared_examples 'a bike container' do
   it 'can tell when it\'s not full' do
     expect(container.full?).to be_false
   end
+
+  # it 'releases broken bike to the van' do 
+  #   container.dock broken_bike
+  #   expect(container.release_to_van).to eq [broken_bike]
+  # end
 
 end

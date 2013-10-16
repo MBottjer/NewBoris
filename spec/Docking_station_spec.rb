@@ -11,29 +11,30 @@ describe DockingStation do
 
 	it_behaves_like 'a bike container'
 
-	it 'can release a bike' do 
+	it 'can release a bike to a customer' do 
 		station.dock(bike)
 		expect(station.release_to_customer).to eq bike 
 	end
 
-  it 'does not release bike if none available' do
+  it 'does not release bike to customer if none available' do
     expect(station.release_to_customer).to eq nil
   end
 
-  it 'does not release bike if bike is broken' do
+  it 'can accept a bike from customer' do
+		expect(station.dock(bike)).to eq [bike]
+	end
+
+  it 'selects broken bikes' do
+    station.dock broken_bike
+    expect(station.broken_bikes).to eq [broken_bike]
+  end
+
+  it 'does not release bike to customer if bike is broken' do
     station.dock broken_bike
     expect(station.release_to_customer).to eq nil
   end
 
-	it 'selects broken bikes' do
-		station.dock broken_bike
-		expect(station.broken_bikes).to eq [broken_bike]
-	end
-
-	it 'releases broken bike to the van' do 
-		station.dock broken_bike
-		expect(station.release_to_van).to eq [broken_bike]
-	end
+	
 
 	it 'after releases bike, bike is no longer in store' do
 		station.dock broken_bike

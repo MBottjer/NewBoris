@@ -6,11 +6,6 @@ module BikeContainer
 		working_bikes.any?
 	end
 
-	def dock(bike)
-		@bike_store<<bike unless full?
-	end
-
-
 	def release_to_van
 		broken_bikes.map{ |bike| @bike_store.delete(bike) }
 	end
