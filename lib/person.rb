@@ -9,13 +9,14 @@ class Person
 	end
 
 	def rent_bike_from station
+		raise 'already has bike' if has_bike? 
 		@bike = station.release
 	end
 
-  def return_bike_to station
-   	station.dock(@bike)
-  	@bike = nil
-  end
+  	def return_bike_to station
+   		station.dock(@bike)
+  		@bike = nil
+  	end
 
 	def has_accident
     @bike.break!

@@ -46,4 +46,8 @@ describe Person do
 		person.has_accident
 	end
 
+	it 'can\'t rent another bike if it has a rented bike' do 
+		expect{person.rent_bike_from(station)}.to raise_error(RuntimeError)
+	end
+
 end
