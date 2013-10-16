@@ -24,7 +24,7 @@ describe Person do
 		expect(person).to have_bike
 	end
 
-	it 'does note have bike after returning bike' do
+	it 'does not have bike after returning bike' do
 		station = double :station, {dock: :banana} 
 		person = Person.new(bike)
 		expect(station).to receive(:dock).with (bike)
@@ -33,10 +33,10 @@ describe Person do
 		expect(person).not_to have_bike      
 	end
 
-
-
-
-
+	it 'can break a bike' do
+		person = Person.new(bike)
+		expect(person).to have_accident
+	end
 
 
 end

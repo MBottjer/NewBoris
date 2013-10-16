@@ -12,9 +12,15 @@ class Person
 		@bike = station.release
 	end
 
-  def return_bike_to station
-    station.dock(@bike)
-    @bike = nil
-  end
+  	def return_bike_to station
+    	station.dock(@bike)
+    	@bike = nil
+  	end
+
+  	def has_accident?
+  		
+  	end
+
+
 
 end
