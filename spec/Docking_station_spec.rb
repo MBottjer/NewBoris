@@ -34,10 +34,8 @@ describe DockingStation do
     expect(station.release_to_customer).to eq nil
   end
 
-	
-
 	it 'after releases bike, bike is no longer in store' do
-		van = double :van
+		van = double :van, load: nil
 		station.dock broken_bike
 		station.release_broken_bikes_to van
 		expect(station.broken_bikes).to eq []
@@ -46,7 +44,7 @@ describe DockingStation do
 	it 'releases multiple broken bikes to the van' do
 		bike1 = broken_bike
 		bike2 = double :bike, broken?: true
-		van = double :van
+		van = double :van, load: [bike1, bike2]
 		station.dock bike1
 		station.dock bike2
 		expect(station.release_broken_bikes_to van).to eq [bike1, bike2]

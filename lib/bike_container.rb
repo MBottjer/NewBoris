@@ -7,7 +7,7 @@ module BikeContainer
 	end
 
 	def release_broken_bikes_to other
-		broken_bikes.map{ |bike| bike_store.delete(bike) }
+		other.load(broken_bikes.each{ |bike| @bike_store.delete(bike) })
 	end
 
 	def working_bikes
@@ -28,6 +28,10 @@ module BikeContainer
 
   def full?
     bike_count == capacity
+  end
+
+  def load bikes
+  	@bike_store.concat bikes	
   end
 
 end

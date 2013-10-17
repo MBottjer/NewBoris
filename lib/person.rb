@@ -11,7 +11,7 @@ class Person
 	end
 
 	def rent_bike_from station
-		@bike = station.release unless has_bike?
+		@bike = station.release_to_customer unless has_bike?
 	end
 
   def return_bike_to station

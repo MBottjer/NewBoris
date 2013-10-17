@@ -25,10 +25,10 @@ shared_examples 'a bike container' do
     expect(container.full?).to be_false
   end
 
-  it 'releases broken bikes to the container requesting them' do
-    other = double :other, empty: nil
-    container = described_class.new broken_bike
-    expect(other).to receive(:empty).with([broken_bike])
+  it 'releases a broken bike to the container requesting one' do
+    other = double :other
+    container.load [broken_bike]
+    expect(other).to receive(:load).with([broken_bike])
     container.release_broken_bikes_to other
   end
 
