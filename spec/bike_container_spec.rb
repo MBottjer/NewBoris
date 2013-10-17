@@ -32,6 +32,40 @@ shared_examples 'a bike container' do
     container.release_broken_bikes_to other
   end
 
+  it 'has no broken bikes after releasing them' do
+    other = double :other, {load: nil}
+    broken_bike2 = double :bike, {broken?: true}
+    container.load [broken_bike, broken_bike2]
+    container.release_broken_bikes_to other
+    expect(container.bike_count).to eq 0
+  end
+
+  it 'releases all working bikes to the container requesting them' do
+    bike2 = double :bike, {broken?: false}
+    bike3 = double :bike, {broken?: false}
+    other = double :other
+    container.load [bike, bike2, bike3]
+    expect(other).to receive(:load).with([bike, bike2, bike3])
+    container.release_working_bikes_to other
+  end
+
+  it 'has no working bikes after releasing them' do
+    bike2 = double :bike, {broken?: false}
+    bike3 = double :bike, {broken?: false}
+    other = double :other, {load: nil}
+    container.load [bike, bike2, bike3]
+    container.release_working_bikes_to other
+    expect(container.bike_count).to eq 0
+  end
+
+  it 'will accept as many bikes as it has space for' do
+    bike1 = double :bike
+    bike2 = double :bike
+    bike3 = double :bike
+    container = described_class.new([bike1], 2)
+    container.load([bike2, bike3])
+    expect(container.bike_count).to eq 2
+  end
 
   # it 'releases broken bikes to van' do 
     

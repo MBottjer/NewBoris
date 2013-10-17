@@ -7,10 +7,16 @@ module BikeContainer
 	end
 
 	def release_broken_bikes_to other
-		bikes_to_load = broken_bikes
+    bikes_to_load = broken_bikes
 		@bike_store.delete_if{|bike| bike.broken?}
-		other.load(bikes_to_load)
+    other.load(bikes_to_load)
 	end
+
+  def release_working_bikes_to other
+    bikes_to_load = working_bikes
+    @bike_store.delete_if{|bike| bike.broken? == false }
+    other.load(bikes_to_load)
+  end
 
 	def working_bikes
 		@bike_store.reject {|bicycle| bicycle.broken?} 
@@ -33,7 +39,7 @@ module BikeContainer
   end
 
   def load bikes
-  	@bike_store.concat bikes	
+    bikes.each { |bike| @bike_store << bike unless full? }
   end
 
 end
