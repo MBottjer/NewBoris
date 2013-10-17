@@ -7,4 +7,9 @@ class Van
 		@bike_store = bikes 
 		@capacity = capacity 
 	end
+
+  def pickup_bikes_from container
+    container.release_working_bikes_to self
+  end
+
 end

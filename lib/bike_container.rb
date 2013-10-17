@@ -6,14 +6,23 @@ module BikeContainer
 
 	def release_broken_bikes_to other
     bikes_to_load = broken_bikes
-		@bike_store.delete_if { |bike| bike.broken? }
-    other.load(bikes_to_load)
+    bikes_to_load.each { |bike| dock_bike_into(other, bike) }
 	end
 
   def release_working_bikes_to other
     bikes_to_load = working_bikes
-    @bike_store.delete_if { |bike| bike.broken? == false }
-    other.load(bikes_to_load)
+    bikes_to_load.each { |bike| dock_bike_into(other, bike) }
+  end
+
+  def dock_bike_into other, bike
+    unless other.full?
+      other.dock bike
+      bike_store.delete bike
+    end
+  end
+
+  def dock(bike)
+    @bike_store << bike unless full?
   end
 
 	def working_bikes
@@ -30,6 +39,10 @@ module BikeContainer
 
   def capacity
     @capacity
+  end
+
+  def bike_store
+    @bike_store
   end
 
   def full?

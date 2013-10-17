@@ -23,14 +23,14 @@ shared_examples 'a bike container' do
   end
 
   it 'releases a broken bike to the container requesting one' do
-    other = double :other
+    other = double :other, { full?: false, dock: nil }
     container.load [broken_bike]
-    expect(other).to receive(:load).with([broken_bike])
+    expect(other).to receive(:dock).with(broken_bike)
     container.release_broken_bikes_to other
   end
 
   it 'has no broken bikes after releasing them' do
-    other = double :other, { load: nil }
+    other = double :other, { load: nil, full?: false, dock: nil }
     broken_bike2 = double :bike, { broken?: true }
     container.load [broken_bike, broken_bike2]
     container.release_broken_bikes_to other
@@ -38,18 +38,18 @@ shared_examples 'a bike container' do
   end
 
   it 'releases all working bikes to the container requesting them' do
-    bike2 = double :bike, { broken?: false }
-    bike3 = double :bike, { broken?: false }
-    other = double :other
+    bike2 = double :bike, { broken?: false, delete: nil }
+    bike3 = double :bike, { broken?: false, delete: nil }
+    other = double :other, { full?: false, bike_store: [], dock: [] }
     container.load [bike, bike2, bike3]
-    expect(other).to receive(:load).with([bike, bike2, bike3])
+    expect(other).to receive(:dock)
     container.release_working_bikes_to other
   end
 
   it 'has no working bikes after releasing them' do
-    bike2 = double :bike, { broken?: false }
-    bike3 = double :bike, { broken?: false }
-    other = double :other, { load: nil }
+    bike2 = double :bike, { broken?: false, delete: nil }
+    bike3 = double :bike, { broken?: false, delete: nil }
+    other = double :other, { load: nil, dock: [], full?: false }
     container.load [bike, bike2, bike3]
     container.release_working_bikes_to other
     expect(container.bike_count).to eq 0
@@ -68,8 +68,9 @@ shared_examples 'a bike container' do
     bike1 = double :bike, { broken?: false }
     bike2 = double :bike, { broken?: false }
     bike3 = double :bike, { broken?: false }
-    container1 = described_class.new([bike1, bike2], 2)
-    container2 = described_class.new([bike3])
+    bike4 = double :bike, { broken?: false }
+    container1 = described_class.new([bike1, bike2], 3)
+    container2 = described_class.new([bike3, bike4])
     container2.release_working_bikes_to container1
     expect(container2.bike_count).to eq 1
   end

@@ -16,8 +16,4 @@ class DockingStation
 		@bike_store.delete(bike)
 	end
 
-	def dock(bike)
-		@bike_store << bike unless full?
-	end
-
 end
