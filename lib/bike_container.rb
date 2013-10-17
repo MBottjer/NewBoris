@@ -6,8 +6,8 @@ module BikeContainer
 		working_bikes.any?
 	end
 
-	def release_to_van
-		broken_bikes.map{ |bike| @bike_store.delete(bike) }
+	def release_broken_bikes_to other
+		broken_bikes.map{ |bike| bike_store.delete(bike) }
 	end
 
 	def working_bikes

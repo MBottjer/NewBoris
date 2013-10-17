@@ -28,7 +28,7 @@ shared_examples 'a bike container' do
   it 'releases broken bikes to the container requesting them' do
     other = double :other, empty: nil
     container = described_class.new broken_bike
-    expect(other).to receive(:empty) with [broken_bike]
+    expect(other).to receive(:empty).with([broken_bike])
     container.release_broken_bikes_to other
   end
 
