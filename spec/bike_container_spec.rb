@@ -64,4 +64,14 @@ shared_examples 'a bike container' do
     expect(container.bike_count).to eq 2
   end
 
+  it 'keeps any bikes that are not accepted by other container' do
+    bike1 = double :bike, { broken?: false }
+    bike2 = double :bike, { broken?: false }
+    bike3 = double :bike, { broken?: false }
+    container1 = described_class.new([bike1, bike2], 2)
+    container2 = described_class.new([bike3])
+    container2.release_working_bikes_to container1
+    expect(container2.bike_count).to eq 1
+  end
+
 end
