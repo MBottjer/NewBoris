@@ -12,7 +12,7 @@ module BikeContainer
 
   def release_working_bikes_to other
     bikes_to_load = working_bikes
-    @bike_store.delete_if { |bike| bike.broken? == false }
+    @bike_store.delete_if { |bike| bike.broken? == false unless other.full? }
     other.load(bikes_to_load)
   end
 
@@ -37,7 +37,7 @@ module BikeContainer
   end
 
   def load bikes
-    bikes.each { |bike| @bike_store << bike unless full? }
+    bikes.each { |bike| @bike_store << bike unless full? } 
   end
 
 end

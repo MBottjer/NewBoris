@@ -40,7 +40,7 @@ shared_examples 'a bike container' do
   it 'releases all working bikes to the container requesting them' do
     bike2 = double :bike, { broken?: false }
     bike3 = double :bike, { broken?: false }
-    other = double :other
+    other = double :other, { full?: nil }
     container.load [bike, bike2, bike3]
     expect(other).to receive(:load).with([bike, bike2, bike3])
     container.release_working_bikes_to other
@@ -49,7 +49,7 @@ shared_examples 'a bike container' do
   it 'has no working bikes after releasing them' do
     bike2 = double :bike, { broken?: false }
     bike3 = double :bike, { broken?: false }
-    other = double :other, { load: nil }
+    other = double :other, { load: nil, full?: nil }
     container.load [bike, bike2, bike3]
     container.release_working_bikes_to other
     expect(container.bike_count).to eq 0
