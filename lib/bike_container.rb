@@ -7,7 +7,9 @@ module BikeContainer
 	end
 
 	def release_broken_bikes_to other
-		other.load(broken_bikes.each{ |bike| @bike_store.delete(bike) })
+		bikes_to_load = broken_bikes
+		@bike_store.delete_if{|bike| bike.broken?}
+		other.load(bikes_to_load)
 	end
 
 	def working_bikes

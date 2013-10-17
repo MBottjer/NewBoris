@@ -16,13 +16,13 @@ describe Person do
 	end
 
 	it 'can get a bike from the station' do
-		expect(station).to receive(:release)
+		expect(station).to receive(:release_to_customer)
     devesh.rent_bike_from station
 	end
 
 	it 'has a bike after renting a bike' do
-		station = double :station, {release: :bike}
-		expect(station).to receive(:release)
+		station = double :station, {release_to_customer: :bike}
+		expect(station).to receive(:release_to_customer)
 		devesh.rent_bike_from station
 		expect(devesh).to have_bike
 	end
