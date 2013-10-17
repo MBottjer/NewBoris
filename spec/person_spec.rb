@@ -2,9 +2,9 @@ require 'person'
 
 describe Person do 
 
-	let (:bike) {double :bike}
-	let (:station) {double :station}
-	let (:jeff) { Person.new bike}
+	let (:bike) { double :bike }
+	let (:station) { double :station }
+	let (:jeff) { Person.new bike }
 	let (:devesh) { Person.new }
 
 	it 'initially has no bike' do
@@ -21,21 +21,21 @@ describe Person do
 	end
 
 	it 'has a bike after renting a bike' do
-		station = double :station, {release_to_customer: :bike}
+		station = double :station, { release_to_customer: :bike }
 		expect(station).to receive(:release_to_customer)
 		devesh.rent_bike_from station
 		expect(devesh).to have_bike
 	end
 
 	it 'can dock a bike in a station' do
-		station = double :station, {full?: false, dock: :banana} 
+		station = double :station, { full?: false, dock: :banana } 
 		expect(station).to receive(:dock).with (bike)
 		jeff.return_bike_to station
 	end
 
 
 	it 'does not have bike after returning bike' do
-		station = double :station, {full?: false, dock: :banana} 
+		station = double :station, { full?: false, dock: :banana } 
 		jeff.return_bike_to station
 
 		expect(jeff).not_to have_bike      

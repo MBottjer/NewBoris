@@ -4,7 +4,7 @@ class DockingStation
 
 	include BikeContainer
 
-	attr_reader :capacity, :bike_store
+	attr_reader :capacity
 
 	def initialize(bikes = [], capacity = 5)
 		@bike_store = bikes 
@@ -17,7 +17,7 @@ class DockingStation
 	end
 
 	def dock(bike)
-		@bike_store<<bike unless full?
+		@bike_store << bike unless full?
 	end
 
 end

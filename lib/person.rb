@@ -15,8 +15,10 @@ class Person
 	end
 
   def return_bike_to station
-		(station.dock(@bike); @bike = nil) unless station.full?
-		#@bike = nil unless station.full?
+  	unless station.full?
+			station.dock(@bike)
+			@bike = nil
+		end
 	end
 
 	def has_accident

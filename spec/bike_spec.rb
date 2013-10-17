@@ -2,7 +2,7 @@ require 'bike'
 
 describe Bike do
 
-	let(:bike) {Bike.new}
+	let(:bike) { Bike.new }
 
 	it 'is not broken when initially rented' do 
 		expect(bike.broken?).to be_false

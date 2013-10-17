@@ -1,11 +1,11 @@
-require 'Docking_station'
+require 'docking_station'
 require 'bike'
 require 'bike_container_spec'
 
 describe DockingStation do 
 
 	let (:bike) { double :bike, broken?: false }
-	let (:station) {DockingStation.new}
+	let (:station) { DockingStation.new }
 	let (:broken_bike) { double :bike, broken?: true }
 
 
@@ -61,12 +61,12 @@ describe DockingStation do
 	 end
 
 	 it 'can hold a maximum of five bikes' do 
-	 	5.times { station.dock(bike)}
+	 	5.times { station.dock(bike) }
 	 	expect(station.bike_count).to eq 5
 	 end
 
 	 it 'cannot hold 6 bikes' do 
-	 	6.times {station.dock(bike)} 
+	 	6.times { station.dock(bike) } 
 	 	expect(station.bike_count).to eq 5
 	 end
 

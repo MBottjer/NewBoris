@@ -1,16 +1,13 @@
 
-
 shared_examples 'a bike container' do
-	let(:container) { described_class.new }
-
-	let(:bike) { double :bike, {broken?: false} }
-  let(:broken_bike) { double :bike, {broken?: true} }
+	
+  let(:container) { described_class.new }
+  let(:bike) { double :bike, { broken?: false } }
+  let(:broken_bike) { double :bike, { broken?: true } }
 
 	it 'can tell us when there are no bikes available' do 
 		expect(container.bike_available?).not_to be_true
 	end
-
-	
 
   it 'can say its capacity' do
     expect(container.capacity).to be 5
@@ -33,16 +30,16 @@ shared_examples 'a bike container' do
   end
 
   it 'has no broken bikes after releasing them' do
-    other = double :other, {load: nil}
-    broken_bike2 = double :bike, {broken?: true}
+    other = double :other, { load: nil }
+    broken_bike2 = double :bike, { broken?: true }
     container.load [broken_bike, broken_bike2]
     container.release_broken_bikes_to other
     expect(container.bike_count).to eq 0
   end
 
   it 'releases all working bikes to the container requesting them' do
-    bike2 = double :bike, {broken?: false}
-    bike3 = double :bike, {broken?: false}
+    bike2 = double :bike, { broken?: false }
+    bike3 = double :bike, { broken?: false }
     other = double :other
     container.load [bike, bike2, bike3]
     expect(other).to receive(:load).with([bike, bike2, bike3])
@@ -50,9 +47,9 @@ shared_examples 'a bike container' do
   end
 
   it 'has no working bikes after releasing them' do
-    bike2 = double :bike, {broken?: false}
-    bike3 = double :bike, {broken?: false}
-    other = double :other, {load: nil}
+    bike2 = double :bike, { broken?: false }
+    bike3 = double :bike, { broken?: false }
+    other = double :other, { load: nil }
     container.load [bike, bike2, bike3]
     container.release_working_bikes_to other
     expect(container.bike_count).to eq 0
@@ -66,14 +63,5 @@ shared_examples 'a bike container' do
     container.load([bike2, bike3])
     expect(container.bike_count).to eq 2
   end
-
-  # it 'releases broken bikes to van' do 
-    
-  #   expect(container.release_to_van).to eq [broken_bike]
-  # end
-
-  # it 'releases broken bikes to garage' do
-
-  # end
 
 end
